@@ -7,3 +7,11 @@ if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
     goto fail;  
 if ((err = SSLHashSHA1.final(&hashCtx, &hashOut)) != 0)
     goto fail;
+    
+if ((err = SSLHashSHA1.update(&hashCtx, &serverRandom)) != 0)
+    goto fail;
+if ((err = SSLHashSHA1.update(&hashCtx, &signedParams)) != 0)
+    goto fail;
+    goto fail;  /* MISTAKE! THIS LINE SHOULD NOT BE HERE */
+if ((err = SSLHashSHA1.final(&hashCtx, &hashOut)) != 0)
+    goto fail;
